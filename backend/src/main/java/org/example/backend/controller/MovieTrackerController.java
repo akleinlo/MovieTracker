@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/hello")
-public class helloWorldController {
+@RequestMapping
+public class MovieTrackerController {
 
-    @GetMapping
-    public String getHelloWorld() {
-        return "Hello World";
+    @GetMapping("/api/movie")
+    public Map<String, String> movie() {
+        return Map.of("value", "Inception");
     }
 
 }
