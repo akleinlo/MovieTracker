@@ -1,6 +1,7 @@
 import './App.css'
 import axios from "axios";
 import {useEffect, useState} from "react";
+import ViewAllMovies from "./components/ViewAllMovies.tsx";
 
 export default function App() {
     const [message, setMessage] = useState<string>("")
@@ -20,6 +21,7 @@ export default function App() {
         <>
             <h1>Backend sagt:</h1>
             <p>{message}</p>
+            <ViewAllMovies />
         </>
     )
 }
