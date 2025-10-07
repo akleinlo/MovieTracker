@@ -18,16 +18,15 @@ export default function ViewAllMovies() {
             {movies.length === 0 ? (
                 <p>Keine Filme gefunden</p>
             ) : (
-                <ul>
+                <ul className="movies-list">
                     {
                         movies.map(movie =>
                             <li key={movie.id}>
-                                <strong>{movie.title}</strong> – {movie.author}
+                                {movie.author} – <strong>{movie.title}</strong>
                             </li>)
                     }
                 </ul>
             )}
         </>
-
     )
 }
