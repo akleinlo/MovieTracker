@@ -31,8 +31,4 @@ class MovieControllerTest {
         assertEquals(movies, actual);
         //verify(mockRepo).findAll();
     }
-
-    @Test
-    void getAllMovies() {
-    }
 }
