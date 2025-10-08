@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import type {Movie} from "../model/Movie.tsx";
 import axios from "axios";
 
-
 export default function ViewAllMovies() {
     const [movies, setMovies] = useState<Movie[]>([])
 
