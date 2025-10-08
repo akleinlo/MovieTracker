@@ -19,8 +19,6 @@ export default function App() {
 
     return (
         <>
-            <h1>Backend sagt:</h1>
-            <p>{message}</p>
             <ViewAllMovies />
         </>
     )

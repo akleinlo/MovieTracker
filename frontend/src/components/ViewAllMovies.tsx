@@ -8,7 +8,7 @@ export default function ViewAllMovies() {
 
     useEffect(() => {
         axios.get("/api/movies")
-            .then(resonse => setMovies(resonse.data))
+            .then(response => setMovies(response.data))
             .catch(error => console.error("Fehler beim Laden der Filme", error));
     }, []);
 
@@ -18,16 +18,15 @@ export default function ViewAllMovies() {
             {movies.length === 0 ? (
                 <p>Keine Filme gefunden</p>
             ) : (
-                <p>
+                <ul className="movies-list">
                     {
                         movies.map(movie =>
                             <li key={movie.id}>
-                                <strong>{movie.title}</strong> – {movie.author}
+                                {movie.author} – <strong>{movie.title}</strong>
                             </li>)
                     }
-                </p>
+                </ul>
             )}
         </>
-
     )
 }
