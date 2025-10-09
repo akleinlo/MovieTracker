@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import type {OMDbMovie} from "../model/OMDbMovie";
 
 type Props = {

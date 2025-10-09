@@ -47,4 +47,5 @@ public record Movie(
 
         @JsonProperty("imdbID")
         String imdbID
-) {}
+) {
+}
