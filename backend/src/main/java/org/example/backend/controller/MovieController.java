@@ -1,6 +1,6 @@
 package org.example.backend.controller;
 
-import org.example.backend.model.OMDbMovie;
+import org.example.backend.model.Movie;
 import org.example.backend.service.MovieService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +17,12 @@ public class MovieController {
     }
 
     @GetMapping("/{title}")
-    public OMDbMovie getMovieByTitle(@PathVariable String title) {
+    public Movie getMovieByTitle(@PathVariable String title) {
         return movieService.getMovieByTitle(title);
     }
 
     @GetMapping
-    public List<OMDbMovie> getAllMovies() {
+    public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
 

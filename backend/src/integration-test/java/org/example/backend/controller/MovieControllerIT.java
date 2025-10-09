@@ -1,9 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.Movie;
-import org.example.backend.model.OMDbMovie;
 import org.example.backend.repository.MovieRepository;
-import org.example.backend.repository.OMDbMovieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ class MovieControllerIT {
     private MockMvc mockMvc;
 
     @Autowired
-    private OMDbMovieRepository movieRepository;
+    private MovieRepository movieRepository;
 
     @BeforeEach
     void setup() {
@@ -34,8 +32,8 @@ class MovieControllerIT {
     @Test
     void getAllMovies_shouldReturnTwoMovies() throws Exception {
         // GIVEN
-        List<OMDbMovie> movies = List.of(
-                new OMDbMovie(
+        List<Movie> movies = List.of(
+                new Movie(
                         null,
                         "Zelig",
                         "1983",
@@ -51,7 +49,7 @@ class MovieControllerIT {
                         "7.6",
                         "tt0086637"
                 ),
-                new OMDbMovie(
+                new Movie(
                         null,
                         "2001: A Space Odyssey",
                         "1968",

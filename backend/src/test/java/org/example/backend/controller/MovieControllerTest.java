@@ -1,10 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.Movie;
-import org.example.backend.model.OMDbMovie;
-import org.example.backend.repository.MovieRepository;
 import org.example.backend.service.MovieService;
-import org.example.backend.service.OMDbService;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -17,8 +14,8 @@ class MovieControllerTest {
     @Test
     void getAllMovies_shouldReturnTwoMovies_whenGivenTwoMovies() {
         // GIVEN
-        List<OMDbMovie> movies = List.of(
-                new OMDbMovie(null, "Zelig", "1983", "25 Aug 1983", "79 min", "Comedy",
+        List<Movie> movies = List.of(
+                new Movie(null, "Zelig", "1983", "25 Aug 1983", "79 min", "Comedy",
                         "Woody Allen", "Woody Allen",
                         "Woody Allen, Mia Farrow, Patrick Horgan",
                         "\"Documentary\" about a man who can look and act like whoever he's around, and meets various famous people.",
@@ -26,7 +23,7 @@ class MovieControllerTest {
                         "https://m.media-amazon.com/images/M/MV5BMDJiYzNhZjUtNTRmMS00ZjA1LWFmNjUtZjgwYWY2NGYxYzg3XkEyXkFqcGc@._V1_SX300.jpg",
                         "7.6",
                         "tt0086637"),
-                new OMDbMovie(null, "2001: A Space Odyssey", "1968", "06 Apr 1968", "149 min", "Sci-Fi",
+                new Movie(null, "2001: A Space Odyssey", "1968", "06 Apr 1968", "149 min", "Sci-Fi",
                         "Stanley Kubrick", "Stanley Kubrick",
                         "Keir Dullea, Gary Lockwood, William Sylvester",
                         "A space epic about human evolution and AI.",
@@ -42,7 +39,7 @@ class MovieControllerTest {
         MovieController controller = new MovieController(mockService);
 
         // WHEN
-        List<OMDbMovie> actual = controller.getAllMovies();
+        List<Movie> actual = controller.getAllMovies();
 
         // THEN
         assertEquals(movies, actual);
@@ -53,7 +50,7 @@ class MovieControllerTest {
     void getMovieByTitle_shouldReturnMovie_whenGivenTitle() {
         // GIVEN
         String title = "Zelig";
-        OMDbMovie mockedMovie = new OMDbMovie(
+        Movie mockedMovie = new Movie(
                 null,
                 "Zelig",
                 "1983",
@@ -76,7 +73,7 @@ class MovieControllerTest {
         MovieController controller = new MovieController(mockService);
 
         // WHEN
-        OMDbMovie actual = controller.getMovieByTitle(title);
+        Movie actual = controller.getMovieByTitle(title);
 
         // THEN
         assertEquals(mockedMovie, actual);
