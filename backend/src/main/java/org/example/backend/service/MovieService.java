@@ -1,32 +1,33 @@
 package org.example.backend.service;
 
-import org.example.backend.model.OMDbMovie;
-import org.springframework.beans.factory.annotation.Value;
+import org.example.backend.model.Movie;
+import org.example.backend.repository.MovieRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 @Service
 public class MovieService {
 
-    private final RestClient restClient;
-    private final String apiKey;
+    private final OmdbApiService omdbService;
+    private final MovieRepository movieRepository;
 
-    // Konstruktor injiziert den API-Key aus application.properties
-    public MovieService(RestClient.Builder restClientBuilder,
-                        @Value("${omdb.api.key}") String apiKey) {
-        this.restClient = restClientBuilder
-                .baseUrl("http://www.omdbapi.com/")
-                .build();
-        this.apiKey = apiKey;
+    public MovieService(OmdbApiService omdbService, MovieRepository movieRepository) {
+        this.omdbService = omdbService;
+        this.movieRepository = movieRepository;
     }
 
-    public OMDbMovie getMovieByName(String movieName) {
-        return restClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("t", movieName)
-                        .queryParam("apikey", apiKey)
-                        .build())
-                .retrieve()
-                .body(OMDbMovie.class);
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll();
+    }
+
+    public Movie getMovieByTitle(String title) {
+        return movieRepository.findByTitle(title)
+                .orElseGet(() -> {
+                    Movie movie = omdbService.getMovieByTitle(title);
+                    movieRepository.save(movie);
+                    return movie;
+                });
     }
 }
+

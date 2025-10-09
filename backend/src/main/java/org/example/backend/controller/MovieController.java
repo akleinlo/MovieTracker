@@ -1,7 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.Movie;
-import org.example.backend.repository.MovieRepository;
+import org.example.backend.service.MovieService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,17 +10,20 @@ import java.util.List;
 @RequestMapping("/api/movies")
 public class MovieController {
 
-    private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
-    public MovieController(MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
+    @GetMapping("/{title}")
+    public Movie getMovieByTitle(@PathVariable String title) {
+        return movieService.getMovieByTitle(title);
     }
 
     @GetMapping
     public List<Movie> getAllMovies() {
-        return List.of(
-                new Movie("1", "Zelig", "Woody Allen"),
-                new Movie("2", "2001: A Space Odyssey", "Stanley Kubrick")
-        );
+        return movieService.getAllMovies();
     }
+
 }
