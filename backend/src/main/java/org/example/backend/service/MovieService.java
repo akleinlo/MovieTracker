@@ -23,14 +23,7 @@ public class MovieService {
 
     public Movie getMovieByTitle(String title) {
         return movieRepository.findByTitle(title)
-                .map(movie -> {
-                    System.out.println("🎬 Found movie in MongoDB: " + movie.title());
-                    return movie;
-                })
-
-
                 .orElseGet(() -> {
-                    System.out.println("🌐 Fetching movie from OMDb API: " + title);
                     Movie movie = omdbService.getMovieByTitle(title);
                     movieRepository.save(movie);
                     return movie;
