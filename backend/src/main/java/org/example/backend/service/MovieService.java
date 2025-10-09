@@ -45,8 +45,7 @@ public class MovieService {
             return moviesInDb;
         }
         // 2. Wenn nichts gefunden, OMDb API Search aufrufen
-        List<Movie> moviesFromApi = omdbService.searchMovies(title);
-        return moviesFromApi;
+        return omdbService.searchMovies(title);
     }
 
 }
