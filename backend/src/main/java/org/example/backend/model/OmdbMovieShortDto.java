@@ -9,8 +9,6 @@ public record OmdbMovieShortDto(
         String year,
         @JsonProperty("imdbID")
         String imdbID,
-        @JsonProperty("Type")
-        String type,
         @JsonProperty("Poster")
         String poster
 ) {
