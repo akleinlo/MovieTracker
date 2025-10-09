@@ -31,5 +31,8 @@ public class MovieController {
         return movieService.addMovie(movie);
     }
 
-
+    @GetMapping("/search")
+    public List<Movie> searchMovies(@RequestParam String title) {
+        return movieService.searchMovies(title);
+    }
 }
