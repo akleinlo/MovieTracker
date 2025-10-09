@@ -22,12 +22,21 @@ public class MovieService {
     }
 
     public Movie getMovieByTitle(String title) {
+        // Zuerst prüfen, ob der Film schon in der DB ist
         return movieRepository.findByTitle(title)
                 .orElseGet(() -> {
+                    // Wenn nicht vorhanden, API aufrufen
                     Movie movie = omdbService.getMovieByTitle(title);
-                    movieRepository.save(movie);
-                    return movie;
+                    // In der DB speichern
+                    return movieRepository.save(movie);
                 });
     }
+
+
+    public Movie addMovie(Movie movie) {
+        return movieRepository.findByImdbID(movie.imdbID())
+                .orElseGet(() -> movieRepository.save(movie));
+    }
+
 }
 

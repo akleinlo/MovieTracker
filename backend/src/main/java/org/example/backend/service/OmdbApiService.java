@@ -18,13 +18,14 @@ public class OmdbApiService {
                 .baseUrl("http://www.omdbapi.com/")
                 .build();
     }
+
     public Movie getMovieByTitle(String title) {
         return restClient.get()
-                        .uri(uriBuilder -> uriBuilder
-                                .queryParam("t", title)
-                                .queryParam("apikey", apiKey)
-                                .build())
-                        .retrieve()
-                        .body(Movie.class);
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("t", title)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .body(Movie.class);
     }
 }
