@@ -3,8 +3,14 @@ import MovieSearch from "./components/MovieSearch";
 
 export default function App() {
     return (
-        <div id="root">
-            <h1 style={{ textAlign: "center", marginTop: "2rem" }}>Movie App</h1>
+        <div style={{
+            fontFamily: "Arial, sans-serif",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "2rem"
+        }}>
+            <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Movie App</h1>
             <MovieSearch />
         </div>
     );
