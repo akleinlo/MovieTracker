@@ -1,9 +1,12 @@
 package org.example.backend.service;
 
+import org.example.backend.model.OmdbSearchResponseDto;
 import org.example.backend.model.Movie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
+
+import java.util.List;
 
 @Service
 public class OmdbApiService {
@@ -28,4 +31,18 @@ public class OmdbApiService {
                 .retrieve()
                 .body(Movie.class);
     }
+    public List<Movie> searchMovies(String title) {
+        OmdbSearchResponseDto response = restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("s", title)
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .body(OmdbSearchResponseDto.class);
+
+        return response != null ? response.toMovieList() : List.of();
+    }
+
+
+
 }

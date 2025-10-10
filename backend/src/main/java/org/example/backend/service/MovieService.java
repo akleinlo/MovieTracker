@@ -38,5 +38,15 @@ public class MovieService {
                 .orElseGet(() -> movieRepository.save(movie));
     }
 
+    public List<Movie> searchMovies(String title) {
+        // 1. Zuerst DB durchsuchen
+        List<Movie> moviesInDb = movieRepository.findByTitleContainingIgnoreCase(title);
+        if (!moviesInDb.isEmpty()) {
+            return moviesInDb;
+        }
+        // 2. Wenn nichts gefunden, OMDb API Search aufrufen
+        return omdbService.searchMovies(title);
+    }
+
 }
 
