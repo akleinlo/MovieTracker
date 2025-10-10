@@ -18,7 +18,17 @@ public record OmdbSearchResponseDto(
                         null,               // id in MongoDB
                         s.title(),
                         s.year(),
-                        "", "", "", "", "", "", "", "", s.poster(), "", s.imdbID()
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "",
+                        s.poster(),
+                        "",
+                        s.imdbID()
                 ))
                 .collect(Collectors.toList());
     }

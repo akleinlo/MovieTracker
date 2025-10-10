@@ -21,36 +21,34 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
+    public Movie getMovieByTitle(String title) {
+        return movieRepository.findByTitle(title)
+                .orElseGet(() -> {
+                    Movie movie = omdbService.getMovieByTitle(title);
+
+                    if (movie == null || movie.imdbID() == null || movie.imdbID().isEmpty()) {
+                        throw new RuntimeException("Movie not found: " + title);
+                    }
+
+                    return movie;
+                });
+    }
+
+    public Movie getMovieByImdbID(String imdbID) {
+        return movieRepository.findByImdbID(imdbID)
+                .orElseGet(() -> omdbService.getMovieByImdbID(imdbID));
+    }
+
     public List<Movie> searchMovies(String title) {
-        // 1. Zuerst DB durchsuchen
         List<Movie> moviesInDb = movieRepository.findByTitleContainingIgnoreCase(title);
         if (!moviesInDb.isEmpty()) {
             return moviesInDb;
         }
-        // 2. Wenn nichts gefunden, OMDb API Search aufrufen
         return omdbService.searchMovies(title);
     }
 
-
-    public Movie getMovieByTitle(String title) {
-        // Zuerst prüfen, ob der Film schon in der DB ist
-        return movieRepository.findByTitle(title)
-                .orElseGet(() -> {
-                    // Wenn nicht vorhanden, API aufrufen
-                    Movie movie = omdbService.getMovieByTitle(title);
-                    // In der DB speichern
-                    return movie; //save entfernt da es noch zu früh ist
-                });
+    public Movie addMovie(Movie movie) {
+        return movieRepository.findByImdbID(movie.imdbID())
+                .orElseGet(() -> movieRepository.save(movie));
     }
-
-
-        public Movie getMovieByImdbID(String imdbID) {
-        return movieRepository.findByImdbID(imdbID)
-                .orElseGet(() -> omdbService.getMovieByImdbID(imdbID));
-    }
-//      Feature zu früh
-//    public Movie addMovie(Movie movie) {
-//        return movieRepository.findByImdbID(movie.imdbID())
-//                .orElseGet(() -> movieRepository.save(movie));
-//    }
 }
