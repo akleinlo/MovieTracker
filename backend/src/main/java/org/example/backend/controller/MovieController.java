@@ -26,13 +26,18 @@ public class MovieController {
         return movieService.getMovieByTitle(title);
     }
 
-    @PostMapping("/add")
-    public Movie addMovie(@RequestBody Movie movie) {
-        return movieService.addMovie(movie);
-    }
-
     @GetMapping("/search")
     public List<Movie> searchMovies(@RequestParam String title) {
         return movieService.searchMovies(title);
     }
+
+    @GetMapping("/id/{imdbID}")
+    public Movie getMovieByImdbID(@PathVariable String imdbID) {
+        return movieService.getMovieByImdbID(imdbID);
+    }
+//    Feature zu früh
+//    @PostMapping("/add")
+//    public Movie addMovie(@RequestBody Movie movie) {
+//        return movieService.addMovie(movie);
+//    }
 }

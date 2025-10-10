@@ -21,23 +21,6 @@ public class MovieService {
         return movieRepository.findAll();
     }
 
-    public Movie getMovieByTitle(String title) {
-        // Zuerst prüfen, ob der Film schon in der DB ist
-        return movieRepository.findByTitle(title)
-                .orElseGet(() -> {
-                    // Wenn nicht vorhanden, API aufrufen
-                    Movie movie = omdbService.getMovieByTitle(title);
-                    // In der DB speichern
-                    return movieRepository.save(movie);
-                });
-    }
-
-
-    public Movie addMovie(Movie movie) {
-        return movieRepository.findByImdbID(movie.imdbID())
-                .orElseGet(() -> movieRepository.save(movie));
-    }
-
     public List<Movie> searchMovies(String title) {
         // 1. Zuerst DB durchsuchen
         List<Movie> moviesInDb = movieRepository.findByTitleContainingIgnoreCase(title);
@@ -48,5 +31,26 @@ public class MovieService {
         return omdbService.searchMovies(title);
     }
 
-}
 
+    public Movie getMovieByTitle(String title) {
+        // Zuerst prüfen, ob der Film schon in der DB ist
+        return movieRepository.findByTitle(title)
+                .orElseGet(() -> {
+                    // Wenn nicht vorhanden, API aufrufen
+                    Movie movie = omdbService.getMovieByTitle(title);
+                    // In der DB speichern
+                    return movie; //save entfernt da es noch zu früh ist
+                });
+    }
+
+
+        public Movie getMovieByImdbID(String imdbID) {
+        return movieRepository.findByImdbID(imdbID)
+                .orElseGet(() -> omdbService.getMovieByImdbID(imdbID));
+    }
+//      Feature zu früh
+//    public Movie addMovie(Movie movie) {
+//        return movieRepository.findByImdbID(movie.imdbID())
+//                .orElseGet(() -> movieRepository.save(movie));
+//    }
+}
