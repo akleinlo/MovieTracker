@@ -1,5 +1,6 @@
 import './App.css';
 import MovieSearch from "./components/MovieSearch";
+import TrackedMovies from "./components/TrackedMovies";
 
 export default function App() {
     return (
@@ -12,6 +13,8 @@ export default function App() {
         }}>
             <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>Movie App</h1>
             <MovieSearch />
+            <h1>Movie Tracker</h1>
+            <TrackedMovies />
         </div>
     );
 }

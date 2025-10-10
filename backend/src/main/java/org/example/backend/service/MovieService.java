@@ -51,4 +51,7 @@ public class MovieService {
         return movieRepository.findByImdbID(movie.imdbID())
                 .orElseGet(() -> movieRepository.save(movie));
     }
+    public List<Movie> getAllTrackedMovies() {
+        return movieRepository.findAll();
+    }
 }

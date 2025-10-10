@@ -13,7 +13,7 @@ public class OmdbApiService {
 
     private final RestClient restClient;
 
-    @Value("${omdb.api.key}")
+    @Value("${OMDB_API_KEY}")
     private String apiKey;
 
     public OmdbApiService(RestClient.Builder restClientBuilder) {

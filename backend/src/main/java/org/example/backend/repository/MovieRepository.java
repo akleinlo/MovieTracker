@@ -9,6 +9,5 @@ import java.util.Optional;
 public interface MovieRepository extends MongoRepository<Movie, String> {
     Optional<Movie> findByImdbID(String imdbID);
     Optional<Movie> findByTitle(String title);
-
     List<Movie> findByTitleContainingIgnoreCase(String regex);
 }
