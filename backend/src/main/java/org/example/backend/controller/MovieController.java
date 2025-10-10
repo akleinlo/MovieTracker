@@ -40,4 +40,8 @@ public class MovieController {
     public Movie addMovie(@RequestBody Movie movie) {
         return movieService.addMovie(movie);
     }
+    @GetMapping("/trackedMovies")
+    public List<Movie> getAllTrackedMovies() {
+        return movieService.getAllTrackedMovies();
+    }
 }
