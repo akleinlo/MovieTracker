@@ -14,7 +14,7 @@ export default function TrackedMovies() {
 
         try {
             const response = await axios.get("/api/movies/trackedMovies", {
-                params: { trackedID: "user123" } // TODO: falls du ein echtes Tracking-System hast, hier dynamisch setzen
+                params: { trackedID: "user123" }
             });
             setMovies(response.data);
         } catch (err) {
