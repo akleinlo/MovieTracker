@@ -5,6 +5,22 @@ type Props = {
 };
 
 export default function MovieDetailCard({ movie }: Props) {
+
+    const handleAddMovie = async () => {
+        try {
+            const response = await fetch('/api/movies/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movie)
+            });
+            const savedMovie = await response.json();
+            alert(`Film gespeichert: ${savedMovie.Title}`);
+        } catch (error) {
+            console.error(error);
+            alert('Fehler beim Speichern des Films');
+        }
+    };
+
     return (
         <div style={{
             border: "1px solid gray",
@@ -29,6 +45,16 @@ export default function MovieDetailCard({ movie }: Props) {
             <p><strong>Plot:</strong> {movie.Plot}</p>
             <p><strong>Language:</strong> {movie.Language}</p>
             <p><strong>IMDB Rating:</strong> {movie.imdbRating}</p>
+
+            {/* Add Button */}
+            <button
+                onClick={handleAddMovie}
+                style={{ marginTop: '1rem', padding: '0.5rem 1rem', cursor: 'pointer' }}
+            >
+                In DB speichern
+            </button>
+
+
         </div>
     );
 }

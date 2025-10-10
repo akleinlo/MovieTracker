@@ -31,6 +31,17 @@ public class OmdbApiService {
                 .retrieve()
                 .body(Movie.class);
     }
+
+    public Movie getMovieByImdbID(String imdbID) {
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .queryParam("i", imdbID)  // "i" für imdbID in der OMDb API
+                        .queryParam("apikey", apiKey)
+                        .build())
+                .retrieve()
+                .body(Movie.class);
+    }
+
     public List<Movie> searchMovies(String title) {
         OmdbSearchResponseDto response = restClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -42,15 +53,7 @@ public class OmdbApiService {
 
         return response != null ? response.toMovieList() : List.of();
     }
-    public Movie getMovieByImdbID(String imdbID) {
-        return restClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .queryParam("i", imdbID)  // "i" für imdbID in der OMDb API
-                        .queryParam("apikey", apiKey)
-                        .build())
-                .retrieve()
-                .body(Movie.class);
-    }
+
 
 
 
