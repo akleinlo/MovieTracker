@@ -1,6 +1,8 @@
 import './App.css';
 import MovieSearch from "./components/MovieSearch";
 import TrackedMovies from "./components/TrackedMovies";
+import Login from "./components/Login.tsx";
+
 
 export default function App() {
     return (
@@ -15,6 +17,7 @@ export default function App() {
             <MovieSearch />
             <h1>Movie Tracker</h1>
             <TrackedMovies />
+            <Login/>
         </div>
     );
 }
