@@ -6,7 +6,7 @@ export default function Login() {
     window.open(host + "/oauth2/authorization/github", "_self")
 
     const loadUser= () => {
-        axios.get("/api/auth")
+        axios.get("/api/auth/me")
             .then(response => console.log(response.data))
     }
     useEffect(() => {
