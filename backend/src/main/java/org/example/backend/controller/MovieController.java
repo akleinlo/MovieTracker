@@ -13,6 +13,7 @@ public class MovieController {
     private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
+
         this.movieService = movieService;
     }
 
@@ -23,25 +24,53 @@ public class MovieController {
 
     @GetMapping("/{title}")
     public Movie getMovieByTitle(@PathVariable String title) {
+
         return movieService.getMovieByTitle(title);
     }
 
     @GetMapping("/id/{imdbID}")
     public Movie getMovieByImdbID(@PathVariable String imdbID) {
+
         return movieService.getMovieByImdbID(imdbID);
     }
 
     @GetMapping("/search")
     public List<Movie> searchMovies(@RequestParam String title) {
+
         return movieService.searchMovies(title);
     }
 
     @PostMapping("/add")
     public Movie addMovie(@RequestBody Movie movie) {
+
         return movieService.addMovie(movie);
     }
+
     @GetMapping("/trackedMovies")
     public List<Movie> getAllTrackedMovies() {
+
         return movieService.getAllTrackedMovies();
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteMovieById(@PathVariable String id) {
+        movieService.deleteMovieById(id);
+    }
+
+    @DeleteMapping("/imdb/{imdbID}")
+    public void deleteMovieByImdbID(@PathVariable String imdbID) {
+        movieService.deleteMovieByImdbID(imdbID);
+    }
+
+    @DeleteMapping("/title/{title}")
+    public void deleteMovieByTitle(@PathVariable String title) {
+        movieService.deleteMovieByTitle(title);
+    }
+
+
+    @DeleteMapping("/all")
+    public void deleteAllMovies() {
+        movieService.deleteAllMovies();
+    }
+
 }
