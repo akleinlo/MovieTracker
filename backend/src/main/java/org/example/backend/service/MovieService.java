@@ -51,7 +51,39 @@ public class MovieService {
         return movieRepository.findByImdbID(movie.imdbID())
                 .orElseGet(() -> movieRepository.save(movie));
     }
+
     public List<Movie> getAllTrackedMovies() {
         return movieRepository.findAll();
+    }
+
+    public void deleteMovieById(String id) {
+        if (!movieRepository.existsById(id)) {
+            throw new RuntimeException("Movie with id " + id + " not found");
+        }
+        movieRepository.deleteById(id);
+    }
+
+    public void deleteMovieByImdbID(String imdbID) {
+        movieRepository.findByImdbID(imdbID)
+                .ifPresentOrElse(
+                        movieRepository::delete,
+                        () -> {
+                            throw new RuntimeException("Movie with IMDb ID " + imdbID + " not found");
+                        }
+                );
+    }
+
+    public void deleteMovieByTitle(String title) {
+        movieRepository.findByTitle(title)
+                .ifPresentOrElse(
+                        movieRepository::delete,
+                        () -> {
+                            throw new RuntimeException("Movie with title " + title + " not found");
+                        }
+                );
+    }
+
+    public void deleteAllMovies() {
+        movieRepository.deleteAll();
     }
 }
