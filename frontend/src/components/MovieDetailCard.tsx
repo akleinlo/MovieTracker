@@ -1,4 +1,7 @@
 import type { OMDbMovie } from "../model/OMDbMovie";
+import styles from "../css/MovieDetailCard.module.css";
+import btnStyles from "../css/Button.module.css";
+
 
 type Props = {
     movie: OMDbMovie;
@@ -22,20 +25,12 @@ export default function MovieDetailCard({ movie }: Props) {
     };
 
     return (
-        <div style={{
-            border: "1px solid gray",
-            padding: "1rem",
-            borderRadius: "8px",
-            maxWidth: "600px",
-            margin: "0 auto",
-            textAlign: "center",
-            backgroundColor: "#111",
-            color: "#fff"
-        }}>
+        <div className={styles.card}>
             <h2>{movie.Title} ({movie.Year})</h2>
-            {movie.Poster && (
-                <img src={movie.Poster} alt={movie.Title} style={{ maxWidth: "300px", margin: "1rem 0" }} />
-            )}
+            {movie.Poster ? (
+                <img className={styles.poster} src={movie.Poster} alt={movie.Title} />
+            ) : null}
+
             <p><strong>Released:</strong> {movie.Released}</p>
             <p><strong>Runtime:</strong> {movie.Runtime}</p>
             <p><strong>Genre:</strong> {movie.Genre}</p>
@@ -46,15 +41,9 @@ export default function MovieDetailCard({ movie }: Props) {
             <p><strong>Language:</strong> {movie.Language}</p>
             <p><strong>IMDB Rating:</strong> {movie.imdbRating}</p>
 
-            {/* Add Button */}
-            <button
-                onClick={handleAddMovie}
-                style={{ marginTop: '1rem', padding: '0.5rem 1rem', cursor: 'pointer' }}
-            >
+            <button className={btnStyles.button} onClick={handleAddMovie}>
                 In DB speichern
             </button>
-
-
         </div>
     );
 }

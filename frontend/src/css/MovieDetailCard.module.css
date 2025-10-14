@@ -1,0 +1,30 @@
+.card {
+    border-radius: 12px;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.poster {
+    max-width: 300px;
+    margin: 1rem 0;
+}
+
+.button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
