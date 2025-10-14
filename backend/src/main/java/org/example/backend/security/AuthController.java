@@ -12,6 +12,9 @@ public class AuthController {
 
     @GetMapping("/me")
     public String getMe(@AuthenticationPrincipal OAuth2User user) {
+        if (user == null) {
+            return "anonymous";
+        }
         return user.getAttribute("login").toString();
     }
 }
