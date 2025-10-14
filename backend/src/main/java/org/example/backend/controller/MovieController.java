@@ -1,6 +1,7 @@
 package org.example.backend.controller;
 
 import org.example.backend.model.Movie;
+import org.example.backend.model.MovieUpdateDto;
 import org.example.backend.service.MovieService;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,11 @@ public class MovieController {
     public List<Movie> getAllTrackedMovies() {
 
         return movieService.getAllTrackedMovies();
+    }
+
+    @PutMapping("/{imdbID}")
+    public Movie updateMovie(@PathVariable String imdbID, @RequestBody MovieUpdateDto dto) {
+        return movieService.updateMovie(imdbID, dto);
     }
 
     @DeleteMapping("/{id}")
