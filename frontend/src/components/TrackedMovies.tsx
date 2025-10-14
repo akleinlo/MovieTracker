@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import type { OMDbMovie } from "../model/OMDbMovie";
 import MovieCard from "./MovieCard";
 
@@ -7,6 +8,7 @@ export default function TrackedMovies() {
     const [movies, setMovies] = useState<OMDbMovie[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const handleLoadTrackedMovies = async () => {
         setLoading(true);
@@ -54,7 +56,11 @@ export default function TrackedMovies() {
                 }}
             >
                 {movies.map((movie) => (
-                    <div key={movie.imdbID}>
+                    <div
+                        key={movie.imdbID}
+                        onClick={() => navigate(`/movies/${movie.imdbID}`)}
+                        style={{ cursor: "pointer" }}
+                    >
                         <MovieCard movie={movie} />
                     </div>
                 ))}
