@@ -1,6 +1,7 @@
 package org.example.backend.service;
 
 import org.example.backend.model.Movie;
+import org.example.backend.model.MovieUpdateDto;
 import org.example.backend.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
@@ -53,8 +54,34 @@ public class MovieService {
     }
 
     public List<Movie> getAllTrackedMovies() {
+
         return movieRepository.findAll();
     }
+
+    public Movie updateMovie(String imdbID, MovieUpdateDto dto) {
+        Movie movie = movieRepository.findByImdbID(imdbID)
+                .orElseThrow(() -> new RuntimeException("Movie not found: " + imdbID));
+
+        Movie updatedMovie = new Movie(
+                movie.id(),
+                dto.getTitle() != null ? dto.getTitle() : movie.title(),
+                dto.getYear() != null ? dto.getYear() : movie.year(),
+                dto.getReleased() != null ? dto.getReleased() : movie.released(),
+                dto.getRuntime() != null ? dto.getRuntime() : movie.runtime(),
+                dto.getGenre() != null ? dto.getGenre() : movie.genre(),
+                dto.getDirector() != null ? dto.getDirector() : movie.director(),
+                dto.getWriter() != null ? dto.getWriter() : movie.writer(),
+                dto.getActors() != null ? dto.getActors() : movie.actors(),
+                dto.getPlot() != null ? dto.getPlot() : movie.plot(),
+                dto.getLanguage() != null ? dto.getLanguage() : movie.language(),
+                dto.getPoster() != null ? dto.getPoster() : movie.poster(),
+                dto.getImdbRating() != null ? dto.getImdbRating() : movie.imdbRating(),
+                movie.imdbID()
+        );
+
+        return movieRepository.save(updatedMovie);
+    }
+
 
     public void deleteMovieById(String id) {
         if (!movieRepository.existsById(id)) {
