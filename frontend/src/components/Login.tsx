@@ -1,5 +1,7 @@
 import axios from "axios";
 import {useEffect} from "react";
+import styles from "../css/Login.module.css";
+import btnStyles from "../css/Button.module.css";
 
 export default function Login() {
     const host: string = window.location.host === "localhost:5173" ? "http://localhost:8080" : window.location.origin
@@ -17,8 +19,8 @@ export default function Login() {
     }, []);
 
     return (
-        <div>
-            <button onClick={handleLogin}>Login</button>
+        <div className={styles.container}>
+            <button className={btnStyles.button} onClick={handleLogin}>Login</button>
         </div>
     )
 }

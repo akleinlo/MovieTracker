@@ -1,4 +1,5 @@
-import type { OMDbMovieShort } from "../model/OMDbMovieShort"; // neues Interface für ShortDto
+import type { OMDbMovieShort } from "../model/OMDbMovieShort";
+import styles from "../css/MovieCard.module.css";
 
 type Props = {
     movie: OMDbMovieShort;
@@ -6,29 +7,12 @@ type Props = {
 
 export default function MovieCard({ movie }: Props) {
     return (
-        <div style={{
-            border: "1px solid gray",
-            padding: "1rem",
-            marginTop: "1rem",
-            borderRadius: "8px",
-            maxWidth: "300px",
-            textAlign: "center",
-            backgroundColor: "black"
-        }}>
+        <div className={styles.card}>
             <h2>{movie.Title} ({movie.Year})</h2>
             {movie.Poster ? (
-                <img src={movie.Poster} alt={movie.Title} style={{ maxWidth: "200px", marginTop: "1rem" }} />
+                <img className={styles.poster} src={movie.Poster} alt={movie.Title} />
             ) : (
-                <div style={{
-                    width: "200px",
-                    height: "300px",
-                    backgroundColor: "#ddd",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginTop: "1rem",
-                    color: "#666"
-                }}>
+                <div className={styles.noPoster}>
                     Kein Poster
                 </div>
             )}

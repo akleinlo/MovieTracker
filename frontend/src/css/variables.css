@@ -1,0 +1,12 @@
+:root {
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --bg-light: #111;
+    --bg-dark: #0a0a0a;
+    --text-light: #fff;
+    --text-muted: #aaa;
+    --border-radius: 8px;
+    --card-shadow: rgba(0, 0, 0, 0.5);
+
+    --background-gradient: linear-gradient(145deg, #0a0a0a, #111, #1a1a1a, #0f172a);
+}

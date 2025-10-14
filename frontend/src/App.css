@@ -1,11 +1,27 @@
 #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: transparent;
     text-align: center;
 }
+
 
 .movies-list {
     text-align: left;
     padding-left: 1rem;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 6rem; /* Abstand nach oben */
+    width: 100%;
+    padding: 4rem
+}
+
